@@ -17,10 +17,6 @@ wget https://phoronix-test-suite.com/releases/repo/pts.debian/files/phoronix-tes
 
     > - CPU performance test: compress-gzip, default params. reason: compress-gzip is a cpu performance test that measures the compression ability of CPUs. The compression process is a computationally intensive task that tackles multiple mathematical tasks and heavily relies on the processing power of the CPU. (I tried spec 2017 but it needs too much disk space so I gave up)
     > - Memory performance: pts/ramspeed, average(including Copy, Scale, Add and Triad), both Integer and Floating Point. It tests the comprehensive memory performance. 
-- gzip compress -> lower is better
-- ramspeed-1.4.3 
-    memory test configuration: options(Copy, Scale, Add, Triad and Averageboth on integer and floating point) I choose Average as the benchmark since it measures the overall level of the memory performance.
-
 2. (1 mark) Run your measurement tool on general purpose `t2.micro`, `t2.medium`, and `c5d.large` Linux instances, respectively, and find the performance differences among these instances. Launch all the instances in the **US East (N. Virginia)** region. Does the performance of EC2 instances increase commensurate with the increase of the number of vCPUs and memory resource?
 
     In order to answer this question, you need to complete the following table by filling out blanks with the measurement results corresponding to each instance type.
@@ -29,7 +25,7 @@ wget https://phoronix-test-suite.com/releases/repo/pts.debian/files/phoronix-tes
     | ----------- | --------------- | ------------------ |
     | `t2.micro` |      129.03           | 10393.99/failed |
     | `t2.medium`  |      52.85           |   19685.47/19627.88   |
-    | `c5d.large` |        49.45         | 13355.18/13254.30(MB/s) |
+    | `c5d.large` |        49.45         | 13355.18/13254.30 |
 
     > Region: US East (N. Virginia). Use `Ubuntu Server 22.04 LTS (HVM)` as AMI.
 
@@ -41,21 +37,21 @@ wget https://phoronix-test-suite.com/releases/repo/pts.debian/files/phoronix-tes
 
     | Type                      | TCP b/w        | RTT (ms) <br />min/avg/max/mdev(50 times) |
     | ------------------------- | -------------- | ----------------------------------------- |
-    | `t3.medium` - `t3.medium` | 1.07 Gbits/sec | 0.226/0.289/0.925/0.109                   |
-    | `m5.large` - `m5.large`   | 1.07 Gbits/sec | 0.175/0.187/0.206/0.005                   |
-    | `c5n.large` - `c5n.large` | 1.07 Gbits/sec | 0.116/0.130/0.198/0.012                   |
-    | `t3.medium` - `c5n.large` | 1.07 Gbits/sec | 0.652/0.697/0.951/0.051                   |
-    | `m5.large` - `c5n.large`  | 1.07 Gbits/sec | 0.636/0.650/0.682/0.007                   |
-    | `m5.large` - `t3.medium`  | 1.07 Gbits/sec | 0.197/0.223/0.345/0.022                   |
+    | `t3.medium` - `t3.medium` | 3.58 Gbits/sec | 0.226/0.289/0.925/0.109                   |
+    | `m5.large` - `m5.large`   | 4.81 Gbits/sec | 0.175/0.187/0.206/0.005                   |
+    | `c5n.large` - `c5n.large` | 9.47 Gbits/sec | 0.116/0.130/0.198/0.012                   |
+    | `t3.medium` - `c5n.large` | 2.31 Gbits/sec | 0.652/0.697/0.951/0.051                   |
+    | `m5.large` - `c5n.large`  | 2.81 Gbits/sec | 0.636/0.650/0.682/0.007                   |
+    | `m5.large` - `t3.medium`  | 4.25 Gbits/sec | 0.197/0.223/0.345/0.022                   |
 
     > Region: US East (N. Virginia). Use `Ubuntu Server 22.04 LTS (HVM)` as AMI. Note: Use private IP address when using iPerf within the same region. You'll need iPerf for measuring TCP bandwidth and Ping for measuring Round-Trip time.
 
 2. (1 mark) What about the network performance for instances deployed in different regions? In order to answer this question, you need to complete the following table.
 
-    | Connection                | TCP b/w (Mbps) | RTT (ms) |
-    | ------------------------- | -------------- | -------- |
-    | N. Virginia - Oregon      |                |          |
-    | N. Virginia - N. Virginia |                |          |
-    | Oregon - Oregon           |                |          |
+    | Connection                | TCP b/w        | RTT (ms)<br />min/avg/max/mdev(50 times) |
+    | ------------------------- | -------------- | ---------------------------------------- |
+    | N. Virginia - Oregon      | 33.6 Mbits/sec | 61.587/62.680/63.733/1.035               |
+    | N. Virginia - N. Virginia | 4.68 Gbits/sec | 0.243/0.279/0.329/0.020                  |
+    | Oregon - Oregon           | 4.96 Gbits/sec | 0.072/0.092/0.105/0.005                  |
 
     > Region: US East (N. Virginia), US West (Oregon). Use `Ubuntu Server 22.04 LTS (HVM)` as AMI. All instances are `c5.large`. Note: Use public IP address when using iPerf within the same region.
