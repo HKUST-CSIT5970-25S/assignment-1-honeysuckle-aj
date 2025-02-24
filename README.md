@@ -15,9 +15,18 @@
 wget https://phoronix-test-suite.com/releases/repo/pts.debian/files/phoronix-test-suite_10.8.4_all.deb
 1. (1 mark) Report the name of measurement tool used in your measurements (you are free to choose *any* open source measurement software as long as it can measure CPU and memory performance). Please describe your configuration of the measurement tool, and explain why you set such a value for each parameter. Explain what the values obtained from measurement results represent (e.g., the value of your measurement result can be the execution time for a scientific computing task, a score given by the measurement tools or something else).
 
+    **Answer:**
+
     > - CPU performance test: compress-gzip, default params. reason: compress-gzip is a cpu performance test that measures the compression ability of CPUs. The compression process is a computationally intensive task that tackles multiple mathematical tasks and heavily relies on the processing power of the CPU. (I tried spec 2017 but it needs too much disk space so I gave up)
     > - Memory performance: pts/ramspeed, average(including Copy, Scale, Add and Triad), both Integer and Floating Point. It tests the comprehensive memory performance. 
+
 2. (1 mark) Run your measurement tool on general purpose `t2.micro`, `t2.medium`, and `c5d.large` Linux instances, respectively, and find the performance differences among these instances. Launch all the instances in the **US East (N. Virginia)** region. Does the performance of EC2 instances increase commensurate with the increase of the number of vCPUs and memory resource?
+
+    **Answer:**
+
+    > The performance of CPU generally increases as the number of vCPUs and memory resources increase, but it is not always linear. And the memory performance doesn't always increase. It may be because of the test methods and the  memory physical quality.
+
+    
 
     In order to answer this question, you need to complete the following table by filling out blanks with the measurement results corresponding to each instance type.
 
@@ -35,6 +44,10 @@ wget https://phoronix-test-suite.com/releases/repo/pts.debian/files/phoronix-tes
 
 1. (1 mark) The metrics of network performance include **TCP bandwidth** and **round-trip time (RTT)**. Within the same region, what network performance is experienced between instances of the same type and different types? In order to answer this question, you need to complete the following table.
 
+    **Answer:**
+
+    > The network performances between the same type of instances are better than those between different type of instances. 
+
     | Type                      | TCP b/w        | RTT (ms) <br />min/avg/max/mdev(50 times) |
     | ------------------------- | -------------- | ----------------------------------------- |
     | `t3.medium` - `t3.medium` | 3.58 Gbits/sec | 0.226/0.289/0.925/0.109                   |
@@ -47,6 +60,8 @@ wget https://phoronix-test-suite.com/releases/repo/pts.debian/files/phoronix-tes
     > Region: US East (N. Virginia). Use `Ubuntu Server 22.04 LTS (HVM)` as AMI. Note: Use private IP address when using iPerf within the same region. You'll need iPerf for measuring TCP bandwidth and Ping for measuring Round-Trip time.
 
 2. (1 mark) What about the network performance for instances deployed in different regions? In order to answer this question, you need to complete the following table.
+
+    > Answer: The network performances between the instances within the same region are better than those in different regions.
 
     | Connection                | TCP b/w        | RTT (ms)<br />min/avg/max/mdev(50 times) |
     | ------------------------- | -------------- | ---------------------------------------- |
